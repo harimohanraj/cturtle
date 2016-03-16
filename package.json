@@ -5,7 +5,8 @@
   "main": "cturtle.js",
   "scripts": {
     "build": "webpack --verbose",
-    "dev": "webpack --watch"
+    "dev": "webpack --watch",
+    "prod": "webpack -p -d"
   },
   "author": "hari m",
   "license": "ISC",
