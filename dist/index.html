@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+<head>
+	<title>CTurtle Demo</title>
+	<script src="cturtle.js"></script>
+</head>
+<body>
+	<canvas id="hilbert-animate-canvas" width="300" height="300"></canvas>
+	<canvas id="hilbert-static-canvas" width="300" height="300"></canvas>
+	<canvas id="dragon-animate-canvas" width="300" height="300"></canvas>
+	<canvas id="dragon-static-canvas" width="300" height="300"></canvas>
+	<canvas id="sierpinski-animate-canvas" width="300" height="300"></canvas>
+	<canvas id="sierpinski-static-canvas" width="300" height="300"></canvas>
+	<script>
+
+
+		var hilbertLevel = 5;
+		var hilbertSize = 300;
+
+		var ctx1 = document.getElementById("hilbert-animate-canvas").getContext("2d");
+		t1 = new cturtle.CTurtle(1, 1, 90, true, ctx1);
+		t1.pencolor("blue");
+		hilbert(t1, hilbertLevel, hilbertSize/Math.pow(2, hilbertLevel), "L");
+		t1.animate();
+
+		var ctx2 = document.getElementById("hilbert-static-canvas").getContext("2d");
+		t2 = new cturtle.CTurtle(1, 1, 90, true, ctx2);
+		t2.pencolor("red");
+		hilbert(t2, hilbertLevel, hilbertSize/Math.pow(2, hilbertLevel), "L");
+		t2.render();
+
+		function hilbert(t, l, w, flag) {
+			if (l === 0) {
+				return;
+			}
+
+			if (flag === "L") {
+				t.right(90);
+				hilbert(t, l-1, w, "R");
+				t.forward(w);
+				t.left(90);
+				hilbert(t, l-1, w, "L");
+				t.forward(w);
+				hilbert(t, l - 1, w, "L");
+				t.left(90);
+				t.forward(w);
+				hilbert(t, l - 1, w, "R");
+				t.right(90);
+
+			} else if (flag === "R") {
+				t.left(90);
+				hilbert(t, l - 1, w, "L");
+				t.forward(w);
+				t.right(90);
+				hilbert(t, l - 1, w, "R");
+			    t.forward(w);
+			    hilbert(t, l - 1, w, "R");
+			    t.right(90);
+			    t.forward(w);
+			    hilbert(t, l - 1, w, "L");
+			    t.left(90);
+			}
+		}	
+
+
+		var dragonLevel = 10;
+		var dragonSize = 300;
+
+		var ctx3 = document.getElementById("dragon-animate-canvas").getContext("2d");
+		t3 = new cturtle.CTurtle(0.25*dragonSize, 0.5*dragonSize, 90, true, ctx3);
+		t3.pencolor("blue");
+		t3.forward(5);
+		dragon(t3, dragonLevel, 5, "X");
+		t3.animate();
+
+		var ctx4 = document.getElementById("dragon-static-canvas").getContext("2d");
+		t4 = new cturtle.CTurtle(0.25*dragonSize, 0.5*dragonSize, 90, true, ctx4);
+		t4.pencolor("red");
+		t4.forward(5);
+		dragon(t4, dragonLevel, 5, "X");
+		t4.render();
+
+		function dragon(t, l , w, flag) {
+			if (l === 0) {
+				return;
+			}
+
+			if (flag === "X") {
+				dragon(t, l-1, w, "X");
+				t.right(90);
+				dragon(t, l-1, w, "Y");
+				t.forward(w);
+				t.right(90);
+			} else if (flag === "Y") {
+				t.left(90);
+				t.forward(w);
+				dragon(t, l-1, w, "X");
+				t.left(90);
+				dragon(t, l-1, w, "Y");
+			}
+		}
+
+
+		var sierpinskiLevel = 7;
+		var sierpinskiSize = 300;
+
+		var ctx5 = document.getElementById("sierpinski-animate-canvas").getContext("2d");
+		t5 = new cturtle.CTurtle(299, 299, 180, true, ctx5);
+		t5.pencolor("blue");
+		sierpinski(t5, sierpinskiLevel, 2, "A");
+		t5.animate();
+
+		var ctx6 = document.getElementById("sierpinski-static-canvas").getContext("2d");
+		t6 = new cturtle.CTurtle(299, 299, 180, true, ctx6);
+		t6.pencolor("red");
+		sierpinski(t6, sierpinskiLevel, 2, "A");
+		t6.render();
+
+		function sierpinski(t, l, w, flag) {
+			if (l === 0) {
+				t.forward(w);
+				return;
+			}
+
+			if (flag === "A") {
+				t.left(60);
+				sierpinski(t, l-1, w, "B");
+				t.right(60);
+				sierpinski(t, l-1, w, "A");
+				t.right(60);
+				sierpinski(t, l-1, w, "B");
+				t.left(60);
+			} else if (flag === "B") {
+				t.right(60);
+				sierpinski(t, l-1, w, "A");
+				t.left(60);
+				sierpinski(t, l-1, w, "B");
+				t.left(60);
+				sierpinski(t, l-1, w, "A");
+				t.right(60);
+			}
+		}
+
+		function cantordust(t, l, w, flag) {}
+
+	</script>
+</body>
+</html>
