@@ -1,8 +1,4 @@
-
-
-
-
-
+// Base turtle
 class Turtle {
 
 	constructor(x=0, y=0, angle=90) {
@@ -14,10 +10,10 @@ class Turtle {
 	}
 
 	forward(length) {
-		console.log(this.x, this.y)
+		//console.log(this.x, this.y)
 		this.x += length * Math.cos(Math.radians(this.angle));
 		this.y += length * Math.sin(Math.radians(this.angle));
-		console.log(this.x, this.y)
+		//console.log(this.x, this.y)
 	}
 
 	backward(length) {
@@ -26,17 +22,17 @@ class Turtle {
 	}
 
 	left(angle) {
-		console.log(this.angle)
+		//console.log(this.angle)
 		this.angle += angle;
 		this.angle = this.angle.mod(360);
-		console.log(this.angle)
+		//console.log(this.angle)
 	}
 
 	right(angle) {
-		console.log(this.angle)
+		//console.log(this.angle)
 		this.angle -= angle;
 		this.angle = this.angle.mod(360);
-		console.log(this.angle)
+		//console.log(this.angle)
 	}
 
 	pensize(size) {

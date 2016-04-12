@@ -3,28 +3,34 @@
 <head>
 	<title>CTurtle Demo</title>
 	<script src="cturtle.js"></script>
+	<style>
+		.canvas {
+		    height: 300px;
+		    width: 300px;
+		    border: 1px solid black;
+		}   
+	</style>
 </head>
 <body>
-	<canvas id="hilbert-animate-canvas" width="300" height="300"></canvas>
-	<canvas id="hilbert-static-canvas" width="300" height="300"></canvas>
-	<canvas id="dragon-animate-canvas" width="300" height="300"></canvas>
-	<canvas id="dragon-static-canvas" width="300" height="300"></canvas>
-	<canvas id="sierpinski-animate-canvas" width="300" height="300"></canvas>
-	<canvas id="sierpinski-static-canvas" width="300" height="300"></canvas>
+	<canvas id="hilbert-animate-canvas" class="canvas" width="300" height="300"></canvas>
+	<canvas id="dragon-animate-canvas" class="canvas" width="300" height="300"></canvas>
+	<canvas id="sierpinski-animate-canvas" class="canvas" width="300" height="300"></canvas>
+	<canvas id="hilbert-static-canvas" class="canvas" width="300" height="300"></canvas>
+	<canvas id="dragon-static-canvas" class="canvas" width="300" height="300"></canvas>
+	<canvas id="sierpinski-static-canvas" class="canvas" width="300" height="300"></canvas>
 	<script>
-
 
 		var hilbertLevel = 5;
 		var hilbertSize = 300;
 
 		var ctx1 = document.getElementById("hilbert-animate-canvas").getContext("2d");
-		t1 = new cturtle.CTurtle(1, 1, 90, true, ctx1);
+		t1 = new cturtle.CTurtle(5, 5, 90, true, ctx1);
 		t1.pencolor("blue");
 		hilbert(t1, hilbertLevel, hilbertSize/Math.pow(2, hilbertLevel), "L");
 		t1.animate();
 
 		var ctx2 = document.getElementById("hilbert-static-canvas").getContext("2d");
-		t2 = new cturtle.CTurtle(1, 1, 90, true, ctx2);
+		t2 = new cturtle.CTurtle(5, 5, 90, true, ctx2);
 		t2.pencolor("red");
 		hilbert(t2, hilbertLevel, hilbertSize/Math.pow(2, hilbertLevel), "L");
 		t2.render();
@@ -140,8 +146,6 @@
 				t.right(60);
 			}
 		}
-
-		function cantordust(t, l, w, flag) {}
 
 	</script>
 </body>
